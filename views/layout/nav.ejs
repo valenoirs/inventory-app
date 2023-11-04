@@ -1,0 +1,170 @@
+<nav class="navbar navbar-expand-lg bg-light" id="nav">
+  <div class="container-fluid">
+    <a class="navbar-brand pt-3 text-muted" role="button"
+      ><h4>
+        <img src="/image/logo.png" alt="" width="35px" />
+        <span class="fw-normal">Aplikasi Inventaris</span>
+      </h4></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-lg-0 pb-1">
+        <li class="nav-item">
+          <a class="nav-link active text-muted" aria-current="page" href="/"
+            ><i class="bi bi-house-door-fill"></i> Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-muted"
+            aria-current="page"
+            href="/barang?field=name&query="
+            ><i class="bi bi-box2-fill"></i> Barang</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-muted"
+            aria-current="page"
+            href="/ruangan?query="
+            ><i class="bi bi-building-fill"></i> Ruangan</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-muted"
+            aria-current="page"
+            href="/rekomendasi"
+            ><i class="bi bi-award-fill"></i> Rekomendasi</a
+          >
+        </li>
+        <% if (locals.user && locals.user.role === "ADMIN") { %>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-muted"
+            aria-current="page"
+            href="/user?field=name&query="
+            ><i class="bi bi-people-fill"></i> Pengguna</a
+          >
+        </li>
+        <% } %>
+      </ul>
+      <div class="d-flex">
+        <% if (locals.user) { %>
+        <div class="dropdown">
+          <a
+            class="text-success me-4"
+            href="#"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-auto-close="outside"
+            style="text-decoration: none"
+            ><i class="bi bi-person-circle"></i> <%= locals.user.name %></a
+          >
+          <ul
+            class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end"
+            aria-labelledby="navbarDropdown"
+          >
+            <li>
+              <div class="container pe-3 ps-3">
+                <p>
+                  <%= locals.user.name %>
+                  <br />
+                  <span class="text-secondary" style="font-size: 0.9rem">
+                    <%= locals.user.email %>
+                  </span>
+                  <br />
+                  <span class="text-secondary" style="font-size: 0.9rem">
+                    <%= locals.user.role %>
+                  </span>
+                </p>
+              </div>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item text-success"
+                href="/profile"
+                style="text-decoration: none"
+                ><i class="bi bi-person-fill-gear"></i> Edit Profil</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-danger"
+                href="/user/logout"
+                style="text-decoration: none"
+                ><i class="bi bi-box-arrow-in-left"></i> Keluar</a
+              >
+            </li>
+          </ul>
+        </div>
+        <% } else { %>
+        <div class="dropdown">
+          <a
+            class="text-dark me-4"
+            href="#"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-auto-close="outside"
+            style="text-decoration: none"
+            ><i class="bi bi-person-circle"></i> Sign in</a
+          >
+          <form
+            method="POST"
+            action="/user/login"
+            class="dropdown-menu dropdown-menu-lg-end p-4"
+            style="width: 300px"
+          >
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail2" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleDropdownFormEmail2"
+                placeholder="email@example.com"
+                name="email"
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword2" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="exampleDropdownFormPassword2"
+                placeholder="Password"
+                name="password"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-door-open-fill"></i> Sign in
+            </button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

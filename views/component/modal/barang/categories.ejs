@@ -1,0 +1,68 @@
+<div
+  class="modal fade"
+  id="categories"
+  tabindex="-1"
+  aria-labelledby="categoriesLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="categoriesLabel">
+          <i class="bi bi-chevron-right"></i> Kategori
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <th></th>
+            <th width="50"></th>
+          </thead>
+          <tbody>
+            <% categories.forEach((category, index) => { %>
+            <tr>
+              <td><%= category.name %></td>
+              <td>
+                <form action="/category?_method=delete" method="post">
+                  <input type="hidden" name="id" value="<%= category.id %>" />
+                  <button
+                    type="submit"
+                    class="text-danger"
+                    style="border: 0; background-color: transparent"
+                  >
+                    <i class="bi bi-trash3-fill"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if (!categories.length) { %>
+        <div class="alert alert-success" role="alert">
+          <i class="bi bi-info-circle-fill"></i> Belum ada kategori yang
+          ditambahkan
+        </div>
+        <% } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button
+          class="btn btn-outline-success"
+          data-bs-target="#addCategory"
+          data-bs-toggle="modal"
+        >
+          <i class="bi bi-tags-fill"></i> Tambah
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

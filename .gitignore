@@ -1,0 +1,13 @@
+# Main
+node_modules
+ignore
+.ignore
+.env
+
+# Code
+public/upload
+
+# Build
+build
+_build
+_build.rar

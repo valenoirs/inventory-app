@@ -1,0 +1,49 @@
+<div
+  class="modal fade"
+  id="edit"
+  tabindex="-1"
+  aria-labelledby="editLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="editLabel"><i class="bi bi-chevron-right"></i> Edit ruangan</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/ruangan?_method=put" enctype="multipart/form-data">
+          <p class="form-text text-danger">
+            *informasi barang yang berada di ruangan ini akan ikut diubah.
+          </p>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" name="name" placeholder=" " value="<%= ruangan.name %>" required autocomplete="off">
+            <label for="name" class="form-label">Nama Ruangan</label>
+          </div>
+          <div class="mb-3">
+            <label for="file" class="form-label">Foto</label>
+            <p class="form-text text-danger">
+              *biarkan kosong jika tidak ingin mengubah foto
+            </p>
+            <input type="file" class="form-control" id="file" name="file">
+            <div id="fileHelp" class="form-text">
+                *png, jpeg, jpg, webp
+            </div>
+          </div>
+
+          <input type="hidden" name="id" value="<%= ruangan.id %>">
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-success"><i class="bi bi-pen"></i> Edit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>

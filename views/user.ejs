@@ -1,0 +1,110 @@
+<%- include('./component/modal/user/add') %>
+<!--  -->
+<%- include('./component/modal/user/edit') %>
+<!--  -->
+<%- include('./component/modal/user/delete') %>
+
+<div class="container-fluid" data-aos="fade-right">
+  <div class="row p-5 justify-content-center">
+    <div class="col">
+      <h1 class="display-6 mb-3">Daftar Pengguna</h1>
+      <form
+        class="input-group mb-5"
+        role="search"
+        method="post"
+        style="width: 500px"
+        action="/user/search"
+      >
+        <select class="form-select" name="field" id="search" required>
+          <option value="name"
+          <% if (field && field === 'name') { %>
+           selected
+          <% } %>
+          >Nama</option>
+          <option value="email"
+          <% if (field && field === 'email') { %>
+            selected
+           <% } %>
+           >Email</option>
+           <option value="role"
+           <% if (field && field === 'role') { %>
+             selected
+            <% } %>
+           >Role</option>
+        </select>
+        <input
+          class="form-control"
+          type="search"
+          name="query"
+          placeholder="Cari..."
+          aria-label="Search"
+          autocomplete="off"
+          value="<%= query %>"
+        />
+        <button class="btn btn-success" type="submit">
+          <i class="bi bi-search"></i> Cari
+        </button>
+      </form>
+      <div class="mb-3">
+        <a
+          class="btn btn-success"
+          aria-current="page"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#add"
+          ><i class="bi bi-building-fill"></i> Tambah Pengguna
+        </a>
+      </div>
+      <div class="mb-1">
+        <span class="form-text text-success"
+          >*data yang ditampilkan adalah data user selain anda.</span
+        >
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col" width="170">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index) => { %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td>
+              <a
+                class="text-decoration-none text-success text-center"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#edit<%= user.id %>"
+              >
+                <i class="bi bi-pencil-square"></i> Edit
+              </a>
+              &ensp;|&ensp;
+              <a
+                class="text-decoration-none text-danger text-center"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#delete<%= user.id %>"
+              >
+                <i class="bi bi-trash"></i> Hapus
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% if (!users.length) { %>
+      <div class="alert alert-success" role="alert">
+        <i class="bi bi-info-circle-fill"></i> Pengguna tidak ditemukan
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

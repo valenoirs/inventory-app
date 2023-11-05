@@ -1,0 +1,118 @@
+<div class="container-fluid" data-aos="fade-right">
+  <div class="row p-5 justify-content-center">
+    <!-- INTRO -->
+    <div class="row mb-3 justify-content-center">
+      <div class="col-10">
+        <h1 class="display-6 mb-3">Rekomendasi</h1>
+        <p class="text-muted">
+          Rekomendasi barang pengadaan dilakukan menggunakan algoritma Apriori,
+          dimana untuk sistem ini hanya dibutuhkan nilai support dari algoritma
+          tersebut.
+          <br />
+          Dalam perhitungannya, jumlah ruangan dijadikan sebagai input jumlah
+          transaksi dan jumlah kategori barang yang berada di dalam ruangan
+          dijadikan sebagai itemset dalam setiap transaksi.
+        </p>
+        <p class="text-muted">
+          Berdasarkan hasil perhitungan yang dilakukan oleh sistem, maka
+          didapatkan hasil sebagai berikut:
+        </p>
+      </div>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="row mb-3 justify-content-center">
+      <div class="col-10">
+        <h4 class="text-success mb-3">
+          <i class="bi bi-award-fill fs-5"></i> Supports
+        </h4>
+
+        <table class="table table-striped table-hover text-center">
+          <thead>
+            <tr class="table-dark">
+              <th scope="col" width="35px">No</th>
+              <th scope="col">Items</th>
+              <th scope="col" width="200">Support</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% supports.forEach((support, index) => { %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td>| <% support.forEach(item => { %> <%= item %> |<% }) %></td>
+              <td><%= support.Support.toFixed(2) %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if (!supports.length) { %>
+        <div class="alert alert-success" role="alert">
+          <i class="bi bi-info-circle-fill"></i> Barang tidak ditemukan
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- CONFIDENCE -->
+    <% /* %>
+    <div class="row justify-content-center mb-5">
+      <div class="col-10">
+        <h4 class="text-success mb-3">Association Rules</h4>
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr class="table-dark">
+              <th scope="col" width="35px">No</th>
+              <th scope="col">Item X</th>
+              <th scope="col">Item Y</th>
+              <th scope="col" width="200">Support</th>
+              <th scope="col" width="200">Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% rules.forEach((rule, index) => { %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= rule.X %></td>
+              <td><%= rule.Y %></td>
+              <td><%= rule.Support.toFixed(2) %></td>
+              <td><%= rule.Confidence.toFixed(2) %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if (!supports.length) { %>
+        <div class="alert alert-success" role="alert">
+          <i class="bi bi-info-circle-fill"></i> Barang tidak ditemukan
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <% */ %>
+
+    <!-- CONCLUSION -->
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-10">
+        <h4 class="text-success mb-3">Kesimpulan</h4>
+
+        <p class="text-muted">
+          Berdasarkan hasil yang ditunjukkan pada tabel Supports di atas, barang
+          yang direkomendasikan oleh algoritma apriori untuk dimasukkan ke dalam
+          pengadaan barang selanjutnya yaitu:
+        </p>
+        <% result.forEach(item => { %>
+        <span>
+          <span class="text-success fw-semibold">
+            <% item.forEach(e => { %> <%= e %>, <% }) %>
+          </span>
+          dengan nilai support :
+          <span class="text-success fw-semibold">
+            <%= item.Support.toFixed(2) %>
+          </span>
+        </span>
+        <br />
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>

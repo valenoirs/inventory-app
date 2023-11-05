@@ -2,7 +2,7 @@ const Barang = require('../models/barang')
 
 module.exports.add = async (req, res) => {
   try {
-    const { code } = req.body
+    const { code, quantity } = req.body
 
     const barang = await Barang.findOne({ code })
 
@@ -13,8 +13,14 @@ module.exports.add = async (req, res) => {
     }
 
     if (barang) {
-      console.error('adding barang error!', e)
+      console.error('barang existed!')
       req.flash('notification', 'Kode barang sudah terdaftar.')
+      return res.redirect('back')
+    }
+
+    if (quantity < 1) {
+      console.error('qunatity below zero!')
+      req.flash('notification', 'Jumlah tidak boleh kurang dari 1.')
       return res.redirect('back')
     }
 
@@ -39,7 +45,7 @@ exports.edit = async (req, res) => {
     const barang = await Barang.findById(id)
 
     if (!barang) {
-      console.error('barang not found!', e)
+      console.error('barang not found!')
       req.flash('notification', 'Barang yang akan diubah tidak ditemukan.')
       return res.redirect('back')
     }
@@ -80,7 +86,7 @@ exports.delete = async (req, res) => {
     console.log(barang)
 
     if (!barang) {
-      console.error('barang not found!', e)
+      console.error('barang not found!')
       req.flash('notification', 'Barang yang akan diubah tidak ditemukan.')
       return res.redirect('back')
     }

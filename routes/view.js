@@ -4,6 +4,7 @@ const Barang = require('../models/barang')
 const Category = require('../models/category')
 const Ruangan = require('../models/ruangan')
 const User = require('../models/user')
+const apriori = require('../utils/apriori')
 
 router.get('/barang', async (req, res) => {
   if (!req.session.user) {
@@ -156,15 +157,29 @@ router.get('/profile', async (req, res) => {
   })
 })
 
-router.get('/rekomendasi', (req, res) => {
+router.get('/rekomendasi', async (req, res) => {
   if (!req.session.user) {
     req.flash('notification', 'Harap login untuk melanjutkan.')
     res.redirect('/')
   }
 
+  const { support, confidence } = req.query
+
+  const { itemSupport: supports, allRules: rules } = await apriori(
+    support,
+    confidence
+  )
+
+  const sortedSupports = supports.sort((a, b) => b.Support - a.Support)
+
+  const result = supports.filter((e) => e.Support === sortedSupports[0].Support)
+
   res.render('rekomendasi', {
     layout: 'layout/main',
     notification: req.flash('notification'),
+    supports: sortedSupports,
+    // rules,
+    result,
   })
 })
 

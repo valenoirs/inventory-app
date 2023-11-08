@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
-    "lummox": "javascript-obfuscator src --output _build --compact false",
+    "lummox": "javascript-obfuscator src --output build --compact false",
     "copy": "node copy",
-    "build": "rimraf _build && npm run lummox && npm run copy",
-    "serve": "node ./_build/index.js"
+    "build": "rimraf build && npm run lummox && npm run copy",
+    "serve": "node ./build/index.js"
   },
   "author": "valenoirs",
   "license": "MIT",

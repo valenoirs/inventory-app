@@ -8,6 +8,7 @@ ignore
 src/public/upload
 
 # Build
+.build
 build
 _build
 _build.rar

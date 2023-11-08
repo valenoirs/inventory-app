@@ -4,8 +4,12 @@
   "description": "Web-based inventory app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "lummox": "javascript-obfuscator src --output _build --compact false",
+    "copy": "node copy",
+    "build": "rimraf _build && npm run lummox && npm run copy",
+    "serve": "node ./_build/index.js"
   },
   "author": "valenoirs",
   "license": "MIT",
@@ -21,6 +25,9 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "fs-extra": "^11.1.1",
+    "javascript-obfuscator": "^4.1.0",
+    "nodemon": "^3.0.1",
+    "rimraf": "^5.0.5"
   }
 }

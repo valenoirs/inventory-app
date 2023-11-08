@@ -5,7 +5,7 @@ ignore
 .env
 
 # Code
-public/upload
+src/public/upload
 
 # Build
 build

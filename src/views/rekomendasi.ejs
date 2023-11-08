@@ -32,14 +32,16 @@
             <tr class="table-dark">
               <th scope="col" width="35px">No</th>
               <th scope="col">Items</th>
-              <th scope="col" width="200">Support</th>
+              <th scope="col" width="350">Support</th>
             </tr>
           </thead>
           <tbody>
             <% supports.forEach((support, index) => { %>
             <tr>
               <th scope="row"><%= index + 1 %></th>
-              <td>| <% support.forEach(item => { %> <%= item %> |<% }) %></td>
+              <td class="text-start">
+                | <% support.forEach(item => { %> <%= item %> |<% }) %>
+              </td>
               <td><%= support.Support.toFixed(2) %></td>
             </tr>
             <% }) %>

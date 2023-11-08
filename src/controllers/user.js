@@ -1,4 +1,4 @@
-const comparePassword = require('../helper/comparePassword')
+const comparePassword = require('../utils/comparePassword')
 const User = require('../models/user')
 
 module.exports.add = async (req, res) => {

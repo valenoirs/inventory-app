@@ -6,6 +6,8 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const path = require('path')
 
+const createDefaultUser = require('./utils/createDefaultUser')
+
 require('dotenv').config()
 
 const app = express()
@@ -78,5 +80,6 @@ app.use('/', (req, res) => {
 })
 
 app.listen(port, () => {
+  createDefaultUser()
   console.log(`Server running at port ${port}`)
 })

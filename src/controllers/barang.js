@@ -8,7 +8,7 @@ module.exports.add = async (req, res) => {
 
     if (!req.file) {
       req.flash('notification', 'Format file yang di upload tidak sesuai.')
-      console.log('[SERVER]: Incorrect file format.')
+      console.log('incorrect file format.')
       return res.redirect('back')
     }
 
@@ -82,8 +82,6 @@ exports.delete = async (req, res) => {
   try {
     const { id } = req.body
     const barang = await Barang.findById(id)
-
-    console.log(barang)
 
     if (!barang) {
       console.error('barang not found!')

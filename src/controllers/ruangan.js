@@ -9,7 +9,7 @@ module.exports.add = async (req, res) => {
 
     if (!req.file) {
       req.flash('notification', 'Format file yang di upload tidak sesuai.')
-      console.log('[SERVER]: Incorrect file format.')
+      console.log('incorrect file format.')
       return res.redirect('back')
     }
 

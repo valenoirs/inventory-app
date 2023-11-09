@@ -30,8 +30,6 @@ exports.delete = async (req, res) => {
     const { id } = req.body
     const category = await Category.findById(id)
 
-    console.log(category)
-
     if (!category) {
       console.error('category not found!')
       req.flash('notification', 'Kategori tidak ditemukan.')
@@ -53,7 +51,6 @@ exports.delete = async (req, res) => {
 
     req.flash('notification', 'Kategori berhasil dihapus.')
     console.log('Category deleted!')
-    // req.flash('notification', 'Satu category berhasil dihapus.')
     return res.redirect('back')
   } catch (e) {
     console.error('deleting category error!', e)

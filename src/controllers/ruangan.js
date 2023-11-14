@@ -56,7 +56,7 @@ exports.edit = async (req, res) => {
     let picture = `/upload/${req.file?.filename}`
 
     if (!req.file) {
-      picture = barang.picture
+      picture = ruangan.picture
     }
 
     await Ruangan.findByIdAndUpdate(id, {

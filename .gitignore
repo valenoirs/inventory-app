@@ -10,5 +10,5 @@ src/public/upload
 # Build
 .build
 build
-_build
-_build.rar
+build.zip
+build.rar

@@ -16,7 +16,7 @@ const apriori = async (support = 40, confidence = 40) => {
       roomItems.push(item.category)
     })
 
-    dataset.push(roomItems.join(', '))
+    if (roomItems.length) dataset.push(roomItems.join(', '))
   }
 
   // dataset = require('./dummyDataset-obfuscated')

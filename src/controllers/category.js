@@ -17,7 +17,7 @@ module.exports.add = async (req, res) => {
 
     console.log('category baru ditambahkan')
     req.flash('notification', 'Kategori berhasil ditambahkan.')
-    return res.redirect('barang')
+    return res.redirect('back')
   } catch (e) {
     console.error('adding category error!', e)
     req.flash('notification', 'Gagal menambahkan kategori, silahkan coba lagi.')

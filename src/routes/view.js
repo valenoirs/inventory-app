@@ -178,7 +178,7 @@ router.get('/rekomendasi', async (req, res) => {
     layout: 'layout/main',
     notification: req.flash('notification'),
     supports: sortedSupports,
-    // rules,
+    rules,
     result,
   })
 })

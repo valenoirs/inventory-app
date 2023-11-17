@@ -14,7 +14,8 @@
           dijadikan sebagai itemset dalam setiap transaksi.
         </p>
         <p class="text-muted">
-          Berdasarkan hasil perhitungan yang dilakukan oleh sistem, maka
+          Berdasarkan hasil perhitungan yang dilakukan oleh sistem dengan batas
+          <em>support</em> = 40% dan batas <em>confidence</em> = 70%, maka
           didapatkan hasil sebagai berikut:
         </p>
       </div>
@@ -39,17 +40,16 @@
             <% supports.forEach((support, index) => { %>
             <tr>
               <th scope="row"><%= index + 1 %></th>
-              <td class="text-start">
-                | <% support.forEach(item => { %> <%= item %> |<% }) %>
-              </td>
-              <td><%= support.Support.toFixed(2) %></td>
+              <td class="text-start"><%= support.join(", ") %></td>
+              <td><%= support.Support.toFixed(2) %>%</td>
             </tr>
             <% }) %>
           </tbody>
         </table>
         <% if (!supports.length) { %>
         <div class="alert alert-success" role="alert">
-          <i class="bi bi-info-circle-fill"></i> Barang tidak ditemukan
+          <i class="bi bi-info-circle-fill"></i> Data barang tidak cukup untuk
+          mendapatkan hasil <em>support</em> lebih dari 40%.
         </div>
         <% } %>
       </div>
@@ -74,44 +74,20 @@
             <% rules.forEach((rule, index) => { %>
             <tr>
               <th scope="row"><%= index + 1 %></th>
-              <td><%= rule.X %></td>
-              <td><%= rule.Y %></td>
-              <td><%= rule.Support.toFixed(2) %></td>
-              <td><%= rule.Confidence.toFixed(2) %></td>
+              <td><%= rule.X.join(", ") %></td>
+              <td><%= rule.Y.join(", ") %></td>
+              <td><%= rule.Support.toFixed(2) %>%</td>
+              <td><%= rule.Confidence.toFixed(2) %>%</td>
             </tr>
             <% }) %>
           </tbody>
         </table>
-        <% if (!supports.length) { %>
+        <% if (!rules.length) { %>
         <div class="alert alert-success" role="alert">
-          <i class="bi bi-info-circle-fill"></i> Barang tidak ditemukan
+          <i class="bi bi-info-circle-fill"></i> Data barang tidak cukup untuk
+          mendapatkan hasil <em>association rule</em> lebih dari 70%.
         </div>
         <% } %>
-      </div>
-    </div>
-
-    <!-- CONCLUSION -->
-    <div class="row justify-content-center" data-aos="fade-up">
-      <div class="col-10">
-        <h4 class="text-success mb-3">Kesimpulan</h4>
-
-        <p class="text-muted">
-          Berdasarkan hasil yang ditunjukkan pada tabel Supports di atas, barang
-          yang direkomendasikan oleh algoritma apriori untuk dimasukkan ke dalam
-          pengadaan barang selanjutnya yaitu:
-        </p>
-        <% result.forEach(item => { %>
-        <span>
-          <span class="text-success fw-semibold">
-            <% item.forEach(e => { %> <%= e %>, <% }) %>
-          </span>
-          dengan nilai support :
-          <span class="text-success fw-semibold">
-            <%= item.Support.toFixed(2) %>
-          </span>
-        </span>
-        <br />
-        <% }) %>
       </div>
     </div>
   </div>

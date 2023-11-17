@@ -171,6 +171,9 @@ router.get('/rekomendasi', async (req, res) => {
   )
 
   const sortedSupports = supports.sort((a, b) => b.Support - a.Support)
+  const sortedRules = rules.sort(
+    (a, b) => b.Confidence - b.Support - (a.Confidence - a.Support)
+  )
 
   const result = supports.filter((e) => e.Support === sortedSupports[0].Support)
 
@@ -178,7 +181,7 @@ router.get('/rekomendasi', async (req, res) => {
     layout: 'layout/main',
     notification: req.flash('notification'),
     supports: sortedSupports,
-    rules,
+    rules: sortedRules,
     result,
   })
 })

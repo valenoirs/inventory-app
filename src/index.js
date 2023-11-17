@@ -11,7 +11,7 @@ const createDefaultUser = require('./utils/createDefaultUser')
 require('dotenv').config()
 
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5001
 
 // Middleware
 app.use(
@@ -56,12 +56,6 @@ app.set('views', path.join(__dirname + '/views'))
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log(`Successfuly connected mongodb instance`))
-  .catch((error) => console.error(error))
-
 // HTTP Routes
 app.use('/', require('./routes/view'))
 
@@ -79,7 +73,13 @@ app.use('/', (req, res) => {
   res.status(404).send('<h1>404 : Page not found.</h1>')
 })
 
-app.listen(port, () => {
-  createDefaultUser()
-  console.log(`Server running at port ${port}`)
-})
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(port, () => {
+      createDefaultUser()
+      console.log(`Server running at port ${port}`)
+    })
+  })
+  .catch((error) => console.error('Something went wrong!'))

@@ -4,7 +4,7 @@ const Barang = require('../models/barang')
 const Category = require('../models/category')
 const Ruangan = require('../models/ruangan')
 const User = require('../models/user')
-const apriori = require('../utils/apriori-obfuscated')
+const apriori = require('../apriori-obfuscated')
 
 router.get('/barang', async (req, res) => {
   if (!req.session.user) {

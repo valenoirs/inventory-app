@@ -1,6 +1,6 @@
-const { getApriori } = require('./apriori/index')
-const Ruangan = require('../models/ruangan')
-const Barang = require('../models/barang')
+const { getApriori } = require('./utils/apriori/index')
+const Ruangan = require('./models/ruangan')
+const Barang = require('./models/barang')
 
 const apriori = async (support = 40, confidence = 40) => {
   let dataset = []

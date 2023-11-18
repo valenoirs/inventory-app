@@ -119,6 +119,7 @@ exports.login = async (req, res) => {
 
     req.session.user = session
 
+    req.flash('notification', `Selamat datang ${name}.`)
     console.log('a user logged in.')
     return res.redirect('/')
   } catch (e) {

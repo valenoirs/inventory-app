@@ -79,7 +79,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(port, () => {
-      createDefaultUser()
+      // createDefaultUser()
       console.log(`Server running at port ${port}`)
     })
   })

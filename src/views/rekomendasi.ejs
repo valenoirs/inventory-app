@@ -6,10 +6,9 @@
         <h1 class="display-6 mb-3">Rekomendasi</h1>
         <p class="text-muted">
           Rekomendasi barang pengadaan dilakukan menggunakan algoritma Apriori,
-          dimana untuk sistem ini hanya dibutuhkan nilai support dari algoritma
-          tersebut.
-          <br />
-          Dalam perhitungannya, jumlah ruangan dijadikan sebagai input jumlah
+          dimana untuk sistem ini dihitung nilai <em>support</em> dan
+          <em>association rules</em> dari algoritma tersebut. Dalam
+          perhitungannya, jumlah ruangan dijadikan sebagai input jumlah
           transaksi dan jumlah kategori barang yang berada di dalam ruangan
           dijadikan sebagai itemset dalam setiap transaksi.
         </p>
@@ -58,7 +57,9 @@
     <!-- CONFIDENCE -->
     <div class="row justify-content-center mb-5">
       <div class="col-10">
-        <h4 class="text-success mb-3">Association Rules</h4>
+        <h4 class="text-success mb-3">
+          <i class="bi bi-link"></i> Association Rules
+        </h4>
 
         <table class="table table-striped table-hover">
           <thead>

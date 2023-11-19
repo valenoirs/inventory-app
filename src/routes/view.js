@@ -170,7 +170,7 @@ router.get('/rekomendasi', async (req, res) => {
     confidence
   )
 
-  const sortedSupports = supports.sort((a, b) => b.Support - a.Support)
+  const sortedSupports = supports.sort((a, b) => a.Support - b.Support)
   const sortedRules = rules.sort(
     (a, b) => b.Confidence - b.Support - (a.Confidence - a.Support)
   )

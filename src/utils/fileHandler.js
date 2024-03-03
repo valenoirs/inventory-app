@@ -20,15 +20,15 @@ const storage = multer.diskStorage({
 
 const multerOption = {
   fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname)
-    if (
-      ext !== '.png' &&
-      ext !== '.jpg' &&
-      ext !== '.jpeg' &&
-      ext !== '.webp'
-    ) {
-      return callback(null, false)
-    }
+    // var ext = path.extname(file.originalname)
+    // if (
+    //   ext !== '.png' &&
+    //   ext !== '.jpg' &&
+    //   ext !== '.jpeg' &&
+    //   ext !== '.webp'
+    // ) {
+    //   return callback(null, false)
+    // }
     callback(null, true)
   },
 

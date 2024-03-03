@@ -1,5 +1,7 @@
 const Barang = require('../models/barang')
 const Ruangan = require('../models/ruangan')
+const filter = require('../utils/fileFilter')
+const path = require('path')
 
 module.exports.add = async (req, res) => {
   try {
@@ -7,19 +9,29 @@ module.exports.add = async (req, res) => {
 
     const ruangan = await Ruangan.findOne({ name })
 
-    if (!req.file) {
-      req.flash('notification', 'Format file yang di upload tidak sesuai.')
-      console.log('incorrect file format.')
-      return res.redirect('back')
+    if (req.file) {
+      const validFile = filter(path.extname(req.file.originalname))
+
+      if (validFile) {
+        req.flash('notification', 'Format file yang di upload tidak sesuai.')
+        console.log('incorrect file format.')
+        return res.redirect('back')
+      }
+
+      req.body.picture = `/upload/${req.file?.filename}`
     }
+
+    // if (!req.file) {
+    //   req.flash('notification', 'Format file yang di upload tidak sesuai.')
+    //   console.log('incorrect file format.')
+    //   return res.redirect('back')
+    // }
 
     if (ruangan) {
       console.error('room name existed!')
       req.flash('notification', 'Nama ruangan sudah terdaftar.')
       return res.redirect('back')
     }
-
-    req.body.picture = `/upload/${req.file?.filename}`
 
     new Ruangan(req.body).save()
 

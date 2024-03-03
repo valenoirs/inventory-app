@@ -1,16 +1,24 @@
 const Barang = require('../models/barang')
+const filter = require('../utils/fileFilter')
+const path = require('path')
 
 module.exports.add = async (req, res) => {
   try {
     const { quantity } = req.body
 
-    // const barang = await Barang.findOne({ code })
+    if (req.file) {
+      const validFile = filter(path.extname(req.file.originalname))
 
-    if (!req.file) {
-      req.flash('notification', 'Format file yang di upload tidak sesuai.')
-      console.log('incorrect file format.')
-      return res.redirect('back')
+      if (validFile) {
+        req.flash('notification', 'Format file yang di upload tidak sesuai.')
+        console.log('incorrect file format.')
+        return res.redirect('back')
+      }
+
+      req.body.picture = `/upload/${req.file?.filename}`
     }
+
+    // const barang = await Barang.findOne({ code })
 
     // if (barang) {
     //   console.error('barang existed!')
@@ -23,8 +31,6 @@ module.exports.add = async (req, res) => {
       req.flash('notification', 'Jumlah tidak boleh kurang dari 1.')
       return res.redirect('back')
     }
-
-    req.body.picture = `/upload/${req.file?.filename}`
 
     new Barang(req.body).save()
 

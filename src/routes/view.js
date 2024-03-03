@@ -188,7 +188,7 @@ router.get('/rekomendasi', async (req, res) => {
 
 router.get('/', async (req, res) => {
   const barang = await Barang.find().count()
-  const ruangan = await Barang.find().count()
+  const ruangan = await Ruangan.find().count()
 
   res.render('index', {
     layout: 'layout/main',

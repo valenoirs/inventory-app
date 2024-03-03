@@ -23,12 +23,16 @@
               <label for="name" class="form-label">Nama</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="code" name="code" placeholder=" " required autocomplete="off">
-              <label for="code" class="form-label">Kode</label>
-            </div>
-            <div class="form-floating mb-3">
               <input type="text" class="form-control" id="brand" name="brand" placeholder=" " required autocomplete="off">
               <label for="brand" class="form-label">Merk</label>
+            </div>
+            <div class="form mb-3">
+              <!-- <input type="text" class="form-control" id="code" name="code" placeholder=" " required autocomplete="off"> -->
+              <label for="code" class="form-label">Kondisi</label>
+              <select class="form-select" name="code" id="code" required>
+                  <option value="BAIK">BAIK</option>
+                  <option value="BAIK">RUSAK</option>
+              </select>
             </div>
             <div class="form mb-3">
               <label for="category" class="form-label">Kategori</label>

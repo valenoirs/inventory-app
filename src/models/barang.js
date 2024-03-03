@@ -4,7 +4,7 @@ const Barang = mongoose.model(
   'Barang',
   new mongoose.Schema({
     name: { type: String, required: true },
-    code: { type: String, required: true, unique: true },
+    code: { type: String, required: true },
     brand: { type: String, required: true },
     category: { type: String, required: true },
     // condition: { type: String, required: true },

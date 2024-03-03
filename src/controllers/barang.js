@@ -2,9 +2,9 @@ const Barang = require('../models/barang')
 
 module.exports.add = async (req, res) => {
   try {
-    const { code, quantity } = req.body
+    const { quantity } = req.body
 
-    const barang = await Barang.findOne({ code })
+    // const barang = await Barang.findOne({ code })
 
     if (!req.file) {
       req.flash('notification', 'Format file yang di upload tidak sesuai.')
@@ -12,11 +12,11 @@ module.exports.add = async (req, res) => {
       return res.redirect('back')
     }
 
-    if (barang) {
-      console.error('barang existed!')
-      req.flash('notification', 'Kode barang sudah terdaftar.')
-      return res.redirect('back')
-    }
+    // if (barang) {
+    //   console.error('barang existed!')
+    //   req.flash('notification', 'Kode barang sudah terdaftar.')
+    //   return res.redirect('back')
+    // }
 
     if (quantity < 1) {
       console.error('qunatity below zero!')

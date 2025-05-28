@@ -32,7 +32,7 @@ module.exports.add = async (req, res) => {
       return res.redirect('back')
     }
 
-    new Barang(req.body).save()
+    await new Barang(req.body).save()
 
     req.flash('notification', 'Barang berhasil ditambahkan.')
     console.log('barang baru ditambahkan')

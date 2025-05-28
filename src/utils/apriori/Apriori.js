@@ -11,6 +11,7 @@ class Apriori {
     let itemSupportDua = new ItemsetCollections()
     let itemSupportTiga = new ItemsetCollections()
     let tandaItemIterasi = new ItemsetCollections()
+    let supportDataTable = []
 
     for (var i = 0; i < itemUnik.length; i += 1) {
       itemSupportDua.push(Itemset.from([itemUnik[i]]))
@@ -21,7 +22,9 @@ class Apriori {
       tandaItemIterasi.clear()
       for (var index in itemSupportDua) {
         let itemset = itemSupportDua[index]
-        itemset.Support = db.cariAprioriSupport(itemset)
+        let aprioriSupportResult = db.cariAprioriSupport(itemset)
+        supportDataTable.push(aprioriSupportResult)
+        itemset.Support = aprioriSupportResult.support
         if (itemset.Support >= supportData) {
           tandaItemIterasi.push(itemset)
           itemSupportTiga.push(itemset)
@@ -33,6 +36,9 @@ class Apriori {
       subsets.forEach((set) => itemSupportDua.push(set))
       k++
     }
+
+    console.log('ItemSet Support Calculation:')
+    console.table(supportDataTable.sort((a, b) => a.support - b.support))
 
     return itemSupportTiga
   }
@@ -47,13 +53,14 @@ class Apriori {
         let subset = subsets[j]
 
         let confidence =
-          (db.cariAprioriSupport(itemset) / db.cariAprioriSupport(subset)) *
+          (db.cariAprioriSupport(itemset).support /
+            db.cariAprioriSupport(subset).support) *
           100.0
         if (confidence >= confidenceThreshold) {
           let rule = new AssociationRules()
           subset.forEach((i) => rule.X.push(i))
           itemset.hapusItemset(subset).forEach((i) => rule.Y.push(i))
-          rule.Support = db.cariAprioriSupport(itemset)
+          rule.Support = db.cariAprioriSupport(itemset).support
           rule.Confidence = confidence
 
           if (rule.X.length > 0 && rule.Y.length > 0) {

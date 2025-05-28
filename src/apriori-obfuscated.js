@@ -21,7 +21,7 @@ const apriori = async (support = 40, confidence = 40) => {
 
   // dataset = require('./utils/dummyDataset-obfuscated')
 
-  return getApriori(dataset, support, confidence)
+  return getApriori(ruangan, dataset, support, confidence)
 }
 
 module.exports = apriori

@@ -35,7 +35,13 @@ class ItemsetCollections extends Array {
 
     let support = (matchCount / this.length) * 100.0
     // console.log(support);
-    return support
+    return {
+      itemset: itemset.join(', '),
+      occurance: matchCount,
+      totalTransaction: this.length,
+      calculation: `${matchCount} / ${this.length} * 100 = ${support}`,
+      support,
+    }
   }
 
   clear() {
